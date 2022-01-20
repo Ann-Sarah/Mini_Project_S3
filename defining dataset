@@ -1,0 +1,40 @@
+# 1.2 Defining Datasets
+
+#function to parse file and extract corresponding emotion for savee dataset
+
+def savee_data_parser(path):
+    
+    audio_item = []
+    emotion = []
+    
+    filename = os.listdir(path)
+    for f in filename:
+        part = f.split('_')
+        if part[2] == 'SAD':
+            emotion.append('sad')
+            audio_item.append(path  + f)
+        elif part[2] == 'ANG':
+            emotion.append('angry')
+            audio_item.append(path  + f)
+        elif part[2] == 'DIS':
+            emotion.append('disgust')
+            audio_item.append(path  + f)
+        elif part[2] == 'FEA':
+            emotion.append('fear')
+            audio_item.append(path + f)
+        elif part[2] == 'HAP':
+            emotion.append('happy')
+            audio_item.append(path + f)
+        elif part[2] == 'NEU':
+            emotion.append('neutral')
+            audio_item.append(path + f)
+        else:
+            emotion.append('Unknown')
+            audio_item.append(path + f)
+
+    savee_df = pd.DataFrame(emotion, columns = ['emotion'])
+    savee_df = pd.concat([savee_df,pd.DataFrame(audio_item, columns = ['audio_file'])],axis=1)
+  
+    return savee_df
+
+    # Defining savee dataset
